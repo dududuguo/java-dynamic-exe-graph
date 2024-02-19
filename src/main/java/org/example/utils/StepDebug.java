@@ -75,8 +75,7 @@ public class StepDebug {
                         done = true;
                         isNormal = true;
                         break;
-                    } else if (event instanceof ClassPrepareEvent) {
-                        ClassPrepareEvent classPrepareEvent = (ClassPrepareEvent) event;
+                    } else if (event instanceof ClassPrepareEvent classPrepareEvent) {
                         ReferenceType refType = classPrepareEvent.referenceType();
                         List<Method> methods = refType.methodsByName("main");
 
@@ -88,8 +87,7 @@ public class StepDebug {
                             prev.setPC("Line: " + location.lineNumber() + (++PC));
 
                         }
-                    } else if (event instanceof BreakpointEvent) {
-                        BreakpointEvent breakpointEvent = (BreakpointEvent) event;
+                    } else if (event instanceof BreakpointEvent breakpointEvent) {
                         // deal with the breakpoint event
                         ThreadReference threadRef = breakpointEvent.thread();
                         StepRequest stepRequest = erm.createStepRequest(
@@ -105,8 +103,7 @@ public class StepDebug {
                         stepRequest.enable();
 //                        System.out.println("Breakpoint at " + breakpointEvent.location());
 
-                    } else if (event instanceof StepEvent) {
-                        StepEvent se = (StepEvent) event;
+                    } else if (event instanceof StepEvent se) {
                         // deal with the step event
                         Location loc = se.location();
                         Method method = loc.method();
@@ -161,7 +158,7 @@ public class StepDebug {
                             PC--;
                             continue;
                         }
-                        System.out.println(content.toString());
+//                        System.out.println(content.toString());
                         if (!nodeSet.getNode(content.toString())) {
                             nodeSet.addNode(content.toString(), nodeId);
                         } else {
