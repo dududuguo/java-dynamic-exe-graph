@@ -1,0 +1,19 @@
+ClassPrepareEvent：当 JVM 加载一个类并准备好它供调试时触发。这个事件对于在类被实际使用之前设置断点很有用。
+
+ClassUnloadEvent：当一个类被卸载时触发。这可以用于监视类的生命周期或者调试类卸载相关的问题。
+
+ExceptionEvent：当在被调试的程序中抛出异常时触发。这允许调试器捕获和响应程序异常。
+
+MethodEntryEvent：当执行进入一个方法时触发。这对于跟踪方法调用非常有用。
+
+MethodExitEvent：当执行退出一个方法时触发。这可以用来监控方法的返回值或执行结束时的状态。
+
+ThreadStartEvent：当一个新线程在被调试的程序中启动时触发。
+
+ThreadDeathEvent：当一个线程在被调试的程序中结束时触发。
+
+VMStartEvent：当 JVM 启动并准备好接受命令时触发。这标志着调试会话的开始。
+
+VMDeathEvent：当 JVM 即将关闭时触发。
+
+VMDisconnectEvent：当调试器与 JVM 的连接断开时触发。这可能是因为 JVM 正常关闭，或者由于其他原因导致连接丢失。
