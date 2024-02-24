@@ -23,7 +23,8 @@ public class StepDebug {
     private dynamicNode prev;
     private int nodeId = 0;
     private int PC = -1;
-    private boolean isNormal = false;
+    private boolean isNormal = true;
+    private int lineNumber;
 
 
     public StepDebug(String mainPath, String OutputPath) {
@@ -67,15 +68,29 @@ public class StepDebug {
             // delete all breakpoints
             erm.deleteAllBreakpoints();
 
+            EventRequestManager mgr = vm.eventRequestManager();
+            ExceptionRequest excReq = mgr.createExceptionRequest(null, true, true);
+            excReq.enable();
+
             System.out.println("Start debugging");
             while (!done) {
                 EventSet eventSet = eventQueue.remove();
                 for (Event event : eventSet) {
-                    if (event instanceof VMDeathEvent || event instanceof VMDisconnectEvent) {
-                        done = true;
-                        isNormal = true;
-                        break;
-                    } else if (event instanceof ClassPrepareEvent classPrepareEvent) {
+                        if(event instanceof ExceptionEvent exceptionEvent){
+                            System.out.println(exceptionEvent.exception());
+                            ObjectReference exception = exceptionEvent.exception();
+                            done = true;
+                            isNormal = false;
+
+                            endNode.setContents("Exception: " + exception.type().name()+"\nLine: "+lineNumber);
+                            endNode.setLabel("Exception: " + exception.type().name()+"\nLine: "+lineNumber);
+                            System.out.println("Exception: " + exception.type().name());
+                            break;
+                        }else if (event instanceof VMDeathEvent || event instanceof VMDisconnectEvent) {
+                            done = true;
+                            System.out.println("Program Normal End !");
+                            break;
+                        } else if (event instanceof ClassPrepareEvent classPrepareEvent) {
                         ReferenceType refType = classPrepareEvent.referenceType();
                         List<Method> methods = refType.methodsByName("main");
 
@@ -101,14 +116,13 @@ public class StepDebug {
                         stepRequest.addClassExclusionFilter("jdk.*");
                         stepRequest.addClassExclusionFilter("In");
                         stepRequest.enable();
-//                        System.out.println("Breakpoint at " + breakpointEvent.location());
 
                     } else if (event instanceof StepEvent se) {
                         // deal with the step event
                         Location loc = se.location();
                         Method method = loc.method();
 
-                        int lineNumber = loc.lineNumber();
+                        lineNumber = loc.lineNumber();
                         StringBuilder content = new StringBuilder();
                         content.append(method).append("\n");
 
@@ -158,7 +172,6 @@ public class StepDebug {
                             PC--;
                             continue;
                         }
-//                        System.out.println(content.toString());
                         if (!nodeSet.getNode(content.toString())) {
                             nodeSet.addNode(content.toString(), nodeId);
                         } else {
@@ -182,16 +195,13 @@ public class StepDebug {
         endNode.setPC(String.valueOf(++PC));
         endNode.setNodeId(++nodeId);
         if (!isNormal) {
-            endNode.setContent("The program is core dump, please check the code.");
-            endNode.setLabel("Core Dump");
-
-            prev.setColor(Color.GREEN);
+//            endNode.setContent("The program is core dump, please check the code.");
+            endNode.setColor(Color.GREEN);
             drawGraph.draw(prev, endNode);
             drawGraph.drawLast(endNode);
         } else {
             endNode.setLabel(PC + " Normal End");
             endNode.setContents("Program Normal End !");
-
             prev.setColor(Color.BLUE);
             drawGraph.draw(prev, endNode);
             drawGraph.drawLast(endNode);

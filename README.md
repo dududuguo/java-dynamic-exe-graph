@@ -5,6 +5,11 @@
 - In this program, feel free to modify the granularity in [StepDebug](src/main/java/org/example/utils/StepDebug.java) to reduce/increase the detail of the graph.
 - The graph is visualized using the [Graphviz](https://graphviz.org/) library.
 
+## Version
+- 1.1
+- Last updated: 2024-02-24
+- fix the bug of the graph generation, fix red and green edges and catch the exception on the graph generation
+
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 

@@ -23,13 +23,13 @@ public class DrawGraph {
     public void draw(dynamicNode prev, dynamicNode cur) {
         String label= cur.getPC();
         if(prev.getLabel()!=null){
-            label=cur.getLabel();
+            label = cur.getLabel();
         }
         g = g.with(Factory.node(String.valueOf(prev.getNodeId()))
                 .with(Label.of("NodeID: " + prev.getNodeId() + "\n" + prev.getContents()))
                 .link(
                         Factory.to(Factory.node(String.valueOf(cur.getNodeId())))
-                                .with(prev.getColor(), Label.of(label))
+                                .with(cur.getColor(), Label.of(label))
                 )
         );
     }
