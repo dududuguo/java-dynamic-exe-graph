@@ -38,7 +38,6 @@ dot -Tpng graph.dot -o graph.png
 ```shell
 cd java-dynamic-exe-graph
 java -jar ./target/dynamic-exe-graph-1.1.jar test.test ./target/classes
-java -jar .\dynamic-exe-graph-1.1.jar test.test ./classes
 dot -Tpng graph.dot -o graph.png
 ```
 
