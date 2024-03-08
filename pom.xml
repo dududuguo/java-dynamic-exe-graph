@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>java-dynamic-exe-graph</artifactId>
+    <artifactId>dynamic-exe-graph</artifactId>
     <version>1.1</version>
 
     <properties>
@@ -23,17 +23,17 @@
                 <executions>
                     <execution>
                         <phase>package</phase>
-                    <goals>
-                        <goal>shade</goal>
-                    </goals>
-                    <configuration>
-                        <transformers>
-                            <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                <mainClass>org.example.Main</mainClass>
-                            </transformer>
-                    </transformers>
-                    </configuration>
-                </execution>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>org.example.Main</mainClass>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
         </plugins>

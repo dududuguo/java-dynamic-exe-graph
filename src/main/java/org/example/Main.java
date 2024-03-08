@@ -25,19 +25,30 @@
 package org.example;
 
 import org.example.utils.StepDebug;
+
+import java.util.Objects;
+
 public class Main {
 
     public static void main(String[] args) {
-        String MainPath;
+        String MainPath ;
+        String ClassPath;
         String OutputPath = System.getProperty("user.dir");
-        if (args.length == 0) {
-            System.out.println("No input file, use default test file");
+
+        if(Objects.equals(args[0], "-h") || Objects.equals(args[0], "-help")){
+            System.out.println("javac <MainPath>.java -g -d <ClassPath>");
+            System.out.println("Usage: java -jar dynamic-exe-graph-1.1.jar <MainPath> <ClassPath>");
+            return;
+        }
+
+        if (args.length < 2 ) {
+            System.out.println("No input file");
             return;
         }
 
         MainPath = args[0];
-        StepDebug stepDebug = new StepDebug(MainPath, OutputPath);
-
+        ClassPath = args[1];
+        StepDebug stepDebug = new StepDebug(MainPath, OutputPath, ClassPath);
         stepDebug.start();
     }
 }

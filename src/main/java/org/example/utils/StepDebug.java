@@ -25,15 +25,17 @@ public class StepDebug {
     private int PC = -1;
     private boolean isNormal = true;
     private int lineNumber;
+    private final String ClassPath;
 
 
-    public StepDebug(String mainPath, String OutputPath) {
+    public StepDebug(String mainPath, String OutputPath, String ClassPath) {
         nodeSet = new NodeSet();
         drawGraph = new DrawGraph(OutputPath);
         MainPath = mainPath;
         prev = new dynamicNode(0, Color.YELLOW, "Start", "Start");
         prev.setContents("Entry Program.");
         prev.setColor(Color.BROWN);
+        this.ClassPath = ClassPath;
     }
 
     public void start() {
@@ -49,8 +51,8 @@ public class StepDebug {
             LaunchingConnector launchingConnector = vmm.defaultConnector();
             Map<String, Connector.Argument> env = launchingConnector.defaultArguments();
             env.get("main").setValue(MainPath);  // set the main class
-            // TODO: fix your the classpath
-            env.get("options").setValue("-classpath /home/classes");
+            String class_value = "-classpath " + ClassPath;
+            env.get("options").setValue(class_value);
 
             // setup the JVM and launch the program
             VirtualMachine vm = launchingConnector.launch(env);
@@ -76,21 +78,21 @@ public class StepDebug {
             while (!done) {
                 EventSet eventSet = eventQueue.remove();
                 for (Event event : eventSet) {
-                        if(event instanceof ExceptionEvent exceptionEvent){
-                            System.out.println(exceptionEvent.exception());
-                            ObjectReference exception = exceptionEvent.exception();
-                            done = true;
-                            isNormal = false;
+                    if (event instanceof ExceptionEvent exceptionEvent) {
+                        System.out.println(exceptionEvent.exception());
+                        ObjectReference exception = exceptionEvent.exception();
+                        done = true;
+                        isNormal = false;
 
-                            endNode.setContents("Exception: " + exception.type().name()+"\nLine: "+lineNumber);
-                            endNode.setLabel("Exception: " + exception.type().name()+"\nLine: "+lineNumber);
-                            System.out.println("Exception: " + exception.type().name());
-                            break;
-                        }else if (event instanceof VMDeathEvent || event instanceof VMDisconnectEvent) {
-                            done = true;
-                            System.out.println("Program Normal End !");
-                            break;
-                        } else if (event instanceof ClassPrepareEvent classPrepareEvent) {
+                        endNode.setContents("Exception: " + exception.type().name() + "\nLine: " + lineNumber);
+                        endNode.setLabel("Exception: " + exception.type().name() + "\nLine: " + lineNumber);
+                        System.out.println("Exception: " + exception.type().name());
+                        break;
+                    } else if (event instanceof VMDeathEvent || event instanceof VMDisconnectEvent) {
+                        done = true;
+                        System.out.println("Program Normal End !");
+                        break;
+                    } else if (event instanceof ClassPrepareEvent classPrepareEvent) {
                         ReferenceType refType = classPrepareEvent.referenceType();
                         List<Method> methods = refType.methodsByName("main");
 
@@ -98,7 +100,7 @@ public class StepDebug {
                             Method method = methods.get(0);
                             Location location = method.location();  // get the location of the main method
                             BreakpointRequest bpReq = erm.createBreakpointRequest(location);
-                            bpReq.enable(); // 启用断点
+                            bpReq.enable(); // enable the breakpoint request
                             prev.setPC("Line: " + location.lineNumber() + (++PC));
 
                         }
@@ -110,6 +112,7 @@ public class StepDebug {
                                 StepRequest.STEP_LINE,
                                 StepRequest.STEP_INTO
                         );
+                        // ignore the java and javax packagesm, you can add more or less
                         stepRequest.addClassExclusionFilter("java.*");
                         stepRequest.addClassExclusionFilter("javax.*");
                         stepRequest.addClassExclusionFilter("sun.*");
@@ -208,7 +211,6 @@ public class StepDebug {
         }
 
         drawGraph.outputFile();
-
         System.out.println("End debugging");
     }
 }

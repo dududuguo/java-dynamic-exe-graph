@@ -1,0 +1,22 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="java-dynamic-exe-graph:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/java_dynamic_exe_graph_jar</output-path>
+    <root id="archive" name="java-dynamic-exe-graph.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="java-dynamic-exe-graph" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/net/arnx/nashorn-promise/0.1.1/nashorn-promise-0.1.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/slf4j/jcl-over-slf4j/1.7.30/jcl-over-slf4j-1.7.30.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/guru/nidi/com/eclipsesource/j2v8/j2v8_win32_x86_64/4.6.0/j2v8_win32_x86_64-4.6.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.7.30/slf4j-api-1.7.30.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/webjars/npm/viz.js-graphviz-java/2.1.3/viz.js-graphviz-java-2.1.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/slf4j/jul-to-slf4j/1.7.30/jul-to-slf4j-1.7.30.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/guru/nidi/com/kitfox/svgSalamander/1.1.3/svgSalamander-1.1.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/apache/commons/commons-exec/1.3/commons-exec-1.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.26/lombok-1.18.26.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/guru/nidi/graphviz-java/0.18.1/graphviz-java-0.18.1.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
