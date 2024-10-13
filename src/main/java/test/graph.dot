@@ -1,0 +1,18 @@
+digraph "dynamic graph" {
+"0" ["label"="NodeID: 0\nEntry Program."]
+"1" ["label"="NodeID: 1\ntest.test.main(java.lang.String[])\nLocal Variables: java.lang.String[] args = instance of java.lang.String[0] (id=67)\nint i = 1\n"]
+"2" ["label"="NodeID: 2\ntest.test.foo(int)\nLocal Variables: int i = 1\n"]
+"3" ["label"="NodeID: 3\ntest.test.foo(int)\nLocal Variables: int i = 2\n"]
+"4" ["label"="NodeID: 4\nEnd\n11 Normal End"]
+"0" -> "1" ["color"="black","label"="1\nLine: 11"]
+"1" -> "4" ["color"="blue","label"="11"]
+"1" -> "2" ["color"="red","label"="8\nLine: 6"]
+"1" -> "2" ["color"="red","label"="5\nLine: 6"]
+"1" -> "2" ["color"="black","label"="2\nLine: 6"]
+"2" -> "3" ["color"="red","label"="9\nLine: 7"]
+"2" -> "3" ["color"="red","label"="6\nLine: 7"]
+"2" -> "3" ["color"="black","label"="3\nLine: 7"]
+"3" -> "1" ["color"="red","label"="10\nLine: 14"]
+"3" -> "1" ["color"="red","label"="7\nLine: 13"]
+"3" -> "1" ["color"="red","label"="4\nLine: 12"]
+}

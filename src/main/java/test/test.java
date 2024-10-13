@@ -1,10 +1,15 @@
 package test;
 
-public class test {
-    public static void main(String[] args) {
-        int i=0;
-        int j=0;
+public class test{
 
-        System.out.println("Hello World");
+    static void foo(int i){
+        i++;
+    }
+
+    public static void main(String[] args) {
+        int i= 1;
+        foo(i);
+        foo(i);
+        foo(i);
     }
 }

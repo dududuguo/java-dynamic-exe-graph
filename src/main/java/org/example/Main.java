@@ -35,6 +35,11 @@ public class Main {
         String ClassPath;
         String OutputPath = System.getProperty("user.dir");
 
+        if(args.length == 0){
+            System.out.println("Usage: java -jar dynamic-exe-graph-1.1.jar <MainPath> <ClassPath>");
+            return;
+        }
+
         if(Objects.equals(args[0], "-h") || Objects.equals(args[0], "-help")){
             System.out.println("javac <MainPath>.java -g -d <ClassPath>");
             System.out.println("Usage: java -jar dynamic-exe-graph-1.1.jar <MainPath> <ClassPath>");

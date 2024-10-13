@@ -35,11 +35,17 @@ dot -Tpng graph.dot -o graph.png
 6. The graph will be generated in the root directory of the project
 
 ### Example
+
+![img.png](src/main/java/test/img.png)
+
 ```shell
 cd java-dynamic-exe-graph
 java -jar ./target/dynamic-exe-graph-1.1.jar test.test ./target/classes
 dot -Tpng graph.dot -o graph.png
 ```
+#### Result
+
+![Example Graph](src/main/java/test/example.png)
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details

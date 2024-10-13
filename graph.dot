@@ -1,9 +1,0 @@
-digraph "dynamic graph" {
-"0" ["label"="NodeID: 0\nEntry Program."]
-"1" ["label"="NodeID: 1\ntest.test.main(java.lang.String[])\nLocal Variables: java.lang.String[] args = instance of java.lang.String[0] (id=67)\nint i = 0\n"]
-"2" ["label"="NodeID: 2\ntest.test.main(java.lang.String[])\nLocal Variables: java.lang.String[] args = instance of java.lang.String[0] (id=67)\nint i = 0\nint j = 0\n"]
-"3" ["label"="NodeID: 3\nEnd\n3 Normal End"]
-"0" -> "1" ["color"="black","label"="1\nLine: 6"]
-"1" -> "2" ["color"="black","label"="2\nLine: 8"]
-"2" -> "3" ["color"="blue","label"="3"]
-}
